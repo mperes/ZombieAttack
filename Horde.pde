@@ -20,7 +20,7 @@ class Horde {
       Bullet bullet = player.weapon.bullets.get(b);
       for(int e=0; e<enemies.size(); e++) {
         Enemy enemy = enemies.get(e);
-        if( pow((bullet.position.x-enemy.position.x), 2) + pow((bullet.position.y - enemy.position.y), 2) < pow(10, 2)  ) {
+        if( pow((bullet.position.x-enemy.position.x), 2) + pow((bullet.position.y - enemy.position.y), 2) < pow(15, 2)  ) {
           //Enemy hit;
           enemies.remove(e);
           player.weapon.bullets.remove(b);
