@@ -2,15 +2,17 @@ class Horde {
   
   ArrayList<Enemy> enemies;
   Player player;
+  AudioSample fx_die;
   
   Horde(Player player) {
     enemies = new ArrayList<Enemy>();
     this.player = player;
+    fx_die = minim.loadSample(SOUNDFXPATH+"enemy_die.wav", 2048);
   }
   
   void spawn() {
     //(int energy, float x, float y, float speed, float power)
-    enemies.add(new Enemy(100, round(random(1))*width, round(random(1))*height, 0.1, 2));
+    enemies.add(new Enemy(100, round(random(1))*random(width), round(random(1))*random(height), 0.1, 2));
   }
   
   void update() {
@@ -22,6 +24,7 @@ class Horde {
           //Enemy hit;
           enemies.remove(e);
           player.weapon.bullets.remove(b);
+          fx_die.trigger();
         }
       }
     }
