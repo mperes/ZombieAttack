@@ -26,7 +26,7 @@ class Weapon {
     if(currentAmmo > 0) {
       currentAmmo--;
       fx_fire.trigger();
-      bullets.add(new Bullet(x, y, direction));
+      bullets.add(new Bullet(x, y, direction, this.range));
       println("boom!");
     } else {
       fx_jammed.trigger();

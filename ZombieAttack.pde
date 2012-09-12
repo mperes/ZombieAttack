@@ -26,8 +26,8 @@ void setup() {
   osc.plug(this, "resetGyroRotation", "/device/4/component/Btn_SELECT");
   osc.plug(this, "trigger", "/device/4/component/Btn_T");
   
-  //Weapon creation:    Name,   Damage, Range, Max Ammo
-  shotgun = new Shotgun("shotgune", 1.0, 10.0,  15);
+  //Weapon creation
+  shotgun = new Shotgun();
   
   //Player creation: Name, X Pos, Y Pos, Initial direction, Initial weapon.
   player = new Player("Miguel", width/2, height/2, 0.0, shotgun);

@@ -12,3 +12,6 @@ final int ENEMYSIZE = 10;
 
 //Size of the radar;
 final int RADARSIZE = 500;
+
+//Speed of the bullets
+final int BULLETSPEED = 3;

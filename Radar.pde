@@ -31,7 +31,9 @@ class Radar {
     //Drawing bullets
     fill(0);
     for(Bullet bullet : horde.player.weapon.bullets) {
-      ellipse(bullet.position.x, bullet.position.y, 5, 5);
+      if( pow((bullet.position.x - width/2), 2) + pow((bullet.position.y - height/2), 2) < pow(RADARSIZE/2, 2)  ) {
+        ellipse(bullet.position.x, bullet.position.y, 5, 5);
+      }
     }
     
     //Drawing hearing distance
