@@ -9,7 +9,7 @@ class Bullet {
     this.position = new PVector(x, y, 0.0);
     this.direction = direction;
     this.alive = true;
-    this.speed = 1;
+    this.speed = 3;
   }
   
   void update() {
