@@ -12,14 +12,11 @@ class Horde {
   
   void spawn() {
     //(int energy, float x, float y, float speed, float power)
-    float angle = random(2*PI);
+    float angle = radians(90);//random(2*PI);
     float spawndist = random(40);
     float spawnX = sin(angle)*(RADARSIZE/2+2*ENEMYSIZE+spawndist)+width/2;
     float spawnY = cos(angle)*(RADARSIZE/2+2*ENEMYSIZE+spawndist)+height/2;
-    println("--------------------");
-    println(spawnX);
-    println(spawnY);
-    enemies.add(new Enemy(100, spawnX, spawnY, 0.1, 2, 4));
+    enemies.add(new Enemy(100, spawnX, spawnY, 0.1, 2, 20));
   }
   
   void update() {
@@ -29,6 +26,7 @@ class Horde {
         Enemy enemy = enemies.get(e);
         if( pow((bullet.position.x-enemy.position.x), 2) + pow((bullet.position.y - enemy.position.y), 2) < pow(15, 2)  ) {
           //Enemy hit;
+          enemy.die();
           enemies.remove(e);
           player.weapon.bullets.remove(b);
           fx_die.trigger();

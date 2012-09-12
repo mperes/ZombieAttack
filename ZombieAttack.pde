@@ -33,7 +33,7 @@ void setup() {
   player = new Player("Miguel", width/2, height/2, 0.0, shotgun);
   
   horde = new Horde(player);
-  for(int x=0; x<30; x++) {
+  for(int x=0; x<1; x++) {
     horde.spawn();
   }
   

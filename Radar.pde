@@ -12,7 +12,13 @@ class Radar {
     strokeWeight(2);
     noFill();
     ellipseMode(CENTER);
-    ellipse(width/2, height/2, RADARSIZE, RADARSIZE); 
+    ellipse(width/2, height/2, RADARSIZE, RADARSIZE);
+   
+    //Drawing hearing distance
+    stroke(200);
+    noFill();
+    ellipseMode(CENTER);
+    ellipse(width/2, height/2, HEARINGDISTANCE*2, HEARINGDISTANCE*2); 
     
     //Drawing player
     noStroke();
@@ -35,12 +41,6 @@ class Radar {
         ellipse(bullet.position.x, bullet.position.y, 5, 5);
       }
     }
-    
-    //Drawing hearing distance
-    stroke(200);
-    noFill();
-    ellipseMode(CENTER);
-    ellipse(width/2, height/2, HEARINGDISTANCE*2, HEARINGDISTANCE*2);
   }
   
   void drawPlayer() {

@@ -13,10 +13,7 @@ class Enemy {
     this.speed = speed;
     this.power = power;
     this.awareness = awareness;
-    //fx_move = minim.loadSample(SOUNDFXPATH+"enemy_move.wav", 2048);
-    //fx_move.trigger();
     fx_move = minim.loadFile(SOUNDFXPATH+"enemy_move.wav");
-    //fx_move.loop();
   }
   
   void update(Player player) {
@@ -36,9 +33,31 @@ class Enemy {
         if(!fx_move.isPlaying()) {
           fx_move.loop();  
         }
+        float gain = map(distance, 0, HEARINGDISTANCE, 13.97, -35.00);
+        float playerAngle = degrees(player.facingDirection) % 360;
+        float enemyAngle = (degrees(atan2(player.position.y-position.y, player.position.x-position.x))-90) % 360;
+        float audioAngle = ((playerAngle + enemyAngle) % 360);
+        if(audioAngle < 0) { audioAngle = 360 - abs(audioAngle); }
+        float pan = sin(radians(audioAngle));
+
+        /*
+        println("Player angle: "+playerAngle);
+        println("Enemy angle: "+enemyAngle);
+        println("Audio angle: "+audioAngle);
+        println("pan angle: "+pan);
+        println("------------");
+        */
+
+        fx_move.setGain(gain);
+        fx_move.setPan(pan);
+
       } else {
         fx_move.pause();
       }
+  }
+  
+  void die() {
+    fx_move.close();
   }
   
 }
