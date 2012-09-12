@@ -5,7 +5,10 @@ final String SOUNDFXPATH = "soundfx/";
 final int INITIALENERGY = 100;
 
 //Player energy
-final int HEARINGDISTANCE = 30;
+final int HEARINGDISTANCE = 100;
 
 //Enemy size in the radar
 final int ENEMYSIZE = 10;
+
+//Size of the radar;
+final int RADARSIZE = 500;

@@ -8,10 +8,11 @@ class Radar {
   
   void draw() {
     //Drawing radar
-    stroke(255);
+    stroke(100);
+    strokeWeight(2);
     noFill();
     ellipseMode(CENTER);
-    ellipse(width/2, height/2, width, height);
+    ellipse(width/2, height/2, RADARSIZE, RADARSIZE); 
     
     //Drawing player
     noStroke();
@@ -22,7 +23,9 @@ class Radar {
     //Drawing enemies
     fill(255, 0, 0);
     for(Enemy enemy : horde.enemies) {
-      ellipse(enemy.position.x, enemy.position.y, ENEMYSIZE, ENEMYSIZE);
+      if( pow((enemy.position.x - width/2), 2) + pow((enemy.position.y - height/2), 2) < pow(RADARSIZE/2, 2)  ) {
+        ellipse(enemy.position.x, enemy.position.y, ENEMYSIZE, ENEMYSIZE);
+      }
     }
     
     //Drawing bullets
@@ -31,6 +34,11 @@ class Radar {
       ellipse(bullet.position.x, bullet.position.y, 5, 5);
     }
     
+    //Drawing hearing distance
+    stroke(200);
+    noFill();
+    ellipseMode(CENTER);
+    ellipse(width/2, height/2, HEARINGDISTANCE*2, HEARINGDISTANCE*2);
   }
   
   void drawPlayer() {

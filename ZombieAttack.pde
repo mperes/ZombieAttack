@@ -12,7 +12,7 @@ Horde horde;
 Radar radar;
 
 void setup() {
-  size(600, 600, P2D);
+  size(800, 600, P2D);
   smooth();
   
   minim = new Minim(this);
@@ -33,7 +33,7 @@ void setup() {
   player = new Player("Miguel", width/2, height/2, 0.0, shotgun);
   
   horde = new Horde(player);
-  for(int x=0; x<10; x++) {
+  for(int x=0; x<30; x++) {
     horde.spawn();
   }
   

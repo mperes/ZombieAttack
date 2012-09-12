@@ -21,7 +21,6 @@ class Enemy {
   
   void update(Player player) {
     float roll = random(20);
-            println(roll+" "+awareness);
       if(roll <= awareness) {
         float angle = atan2(position.y-player.position.y, position.x-player.position.x);
         float newX = cos(angle-PI) * speed + position.x;

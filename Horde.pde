@@ -12,7 +12,14 @@ class Horde {
   
   void spawn() {
     //(int energy, float x, float y, float speed, float power)
-    enemies.add(new Enemy(100, round(random(1))*random(width), round(random(1))*random(height), 0.1, 2, 4));
+    float angle = random(2*PI);
+    float spawndist = random(40);
+    float spawnX = sin(angle)*(RADARSIZE/2+2*ENEMYSIZE+spawndist)+width/2;
+    float spawnY = cos(angle)*(RADARSIZE/2+2*ENEMYSIZE+spawndist)+height/2;
+    println("--------------------");
+    println(spawnX);
+    println(spawnY);
+    enemies.add(new Enemy(100, spawnX, spawnY, 0.1, 2, 4));
   }
   
   void update() {
