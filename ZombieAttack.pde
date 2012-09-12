@@ -73,8 +73,24 @@ void keyPressed() {
       
     case 82: //Reload
       player.reload();
-      break;      
+      break;
+      
+    case LEFT:
+      player.directionSolver.setValue(500);
+      break;
+      
+    case RIGHT:
+      player.directionSolver.setValue(-500);
+      break;
+      
+    default:
+      println(keyCode);
+      break;
   }
+}
+
+void keyReleased(){
+  player.directionSolver.setValue(0);
 }
 
 void stop()
