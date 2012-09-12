@@ -7,7 +7,7 @@ OscP5 osc;
 Minim minim; //Global sound object
 
 Player player;
-Weapon shotgun;
+Shotgun shotgun;
 Horde horde;
 Radar radar;
 
@@ -27,7 +27,7 @@ void setup() {
   osc.plug(this, "trigger", "/device/4/component/Btn_T");
   
   //Weapon creation:    Name,   Damage, Range, Max Ammo
-  shotgun = new Weapon("shotgun", 1.0,   10,    15);
+  shotgun = new Shotgun("shotgune", 1.0, 10.0,  15);
   
   //Player creation: Name, X Pos, Y Pos, Initial direction, Initial weapon.
   player = new Player("Miguel", width/2, height/2, 0.0, shotgun);
@@ -73,8 +73,22 @@ void keyPressed() {
       
     case 82: //Reload
       player.reload();
-      break;      
+      break;
+      
+    case 37:
+      player.directionSolver.setValue(500);
+      break;
+    case 39:
+      player.directionSolver.setValue(-500);
+      break;
+    default:
+      println(keyCode);
+      break;
   }
+}
+
+void keyReleased(){
+  player.directionSolver.setValue(0);
 }
 
 void stop()
