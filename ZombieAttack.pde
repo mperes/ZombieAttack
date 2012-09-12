@@ -12,7 +12,7 @@ Horde horde;
 Radar radar;
 
 void setup() {
-  size(600, 600, P3D);
+  size(600, 600, P2D);
   smooth();
   
   minim = new Minim(this);
@@ -73,24 +73,8 @@ void keyPressed() {
       
     case 82: //Reload
       player.reload();
-      break;
-      
-    case LEFT:
-      player.directionSolver.setValue(500);
-      break;
-      
-    case RIGHT:
-      player.directionSolver.setValue(-500);
-      break;
-      
-    default:
-      println(keyCode);
-      break;
+      break;      
   }
-}
-
-void keyReleased(){
-  player.directionSolver.setValue(0);
 }
 
 void stop()

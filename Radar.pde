@@ -7,21 +7,25 @@ class Radar {
   }
   
   void draw() {
+    //Drawing radar
     stroke(255);
     noFill();
     ellipseMode(CENTER);
     ellipse(width/2, height/2, width, height);
     
+    //Drawing player
     noStroke();
     fill(0, 0, 255);
     //ellipse(horde.player.position.x, horde.player.position.y, 5, 5);
     drawPlayer();
     
+    //Drawing enemies
     fill(255, 0, 0);
     for(Enemy enemy : horde.enemies) {
-      ellipse(enemy.position.x, enemy.position.y, 7, 7);
+      ellipse(enemy.position.x, enemy.position.y, ENEMYSIZE, ENEMYSIZE);
     }
     
+    //Drawing bullets
     fill(0);
     for(Bullet bullet : horde.player.weapon.bullets) {
       ellipse(bullet.position.x, bullet.position.y, 5, 5);
