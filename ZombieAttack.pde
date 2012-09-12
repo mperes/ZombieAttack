@@ -11,6 +11,18 @@ Shotgun shotgun;
 Horde horde;
 Radar radar;
 
+AudioPlayer backgroundMusic;
+String[] soundtracks = {
+  "1 - Pestis Cruento.MP3",
+  "2 - Unholy Voices.MP3",
+  "3 - Dark Carnival.MP3",
+  "4 - Infuscomus.MP3",
+  "5 - Father Time.MP3",
+  "6 - Waiting For The End.MP3",
+  "7 - Fate Of The Damned.MP3",
+  "8 - Double, Double, Toil and Trouble.MP3"
+};
+
 void setup() {
   size(800, 600, P2D);
   smooth();
@@ -38,6 +50,10 @@ void setup() {
   }
   
   radar = new Radar(horde);
+  
+  backgroundMusic = minim.loadFile( randTrack() );
+  backgroundMusic.play();
+  backgroundMusic.setGain(SOUNDTRACKGAIN);
 }
 
 void draw() {
@@ -93,6 +109,21 @@ void keyReleased(){
 
 void stop()
 {
+  backgroundMusic.close();
   minim.stop();
   super.stop();
+}
+
+String randTrack() {
+  int track = round(random(soundtracks.length-1));
+  String trackpath = SOUNDTRACKPATH+soundtracks[track];
+  return trackpath;
+}
+
+void updateTrack() {
+  if(!backgroundMusic.isPlaying()) {
+    backgroundMusic = minim.loadFile( randTrack() );
+    backgroundMusic.play();
+    backgroundMusic.setGain(SOUNDTRACKGAIN);
+  }
 }

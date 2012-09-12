@@ -1,5 +1,7 @@
 //Path to sound effect files. This path is relative to /Data
 final String SOUNDFXPATH = "soundfx/";
+final String SOUNDTRACKPATH = "soundtrack/Blood/";
+final float SOUNDTRACKGAIN = -25;
 
 //Player energy
 final int INITIALENERGY = 100;
