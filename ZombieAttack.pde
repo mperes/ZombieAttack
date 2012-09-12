@@ -10,6 +10,7 @@ Player player;
 Shotgun shotgun;
 Horde horde;
 Radar radar;
+int shotDelayCount = 0;
 
 AudioPlayer backgroundMusic;
 String[] soundtracks = {
@@ -29,15 +30,6 @@ void setup() {
   
   minim = new Minim(this);
   
-  // Listen to port
-  osc = new OscP5(this, 12000);
-  // Osc plug      Function name      Plug name
-  //  |                |                |
-  osc.plug(this, "setGyroValue", "/device/4/component/GyroZ");
-  osc.plug(this, "reload", "/device/4/component/Btn_MOVE");
-  osc.plug(this, "resetGyroRotation", "/device/4/component/Btn_SELECT");
-  osc.plug(this, "trigger", "/device/4/component/Btn_T");
-  
   //Weapon creation
   shotgun = new Shotgun();
   
@@ -51,6 +43,15 @@ void setup() {
   
   radar = new Radar(horde);
   
+  // Listen to port
+  osc = new OscP5(this, 12000);
+  // Osc plug      Function name      Plug name
+  //  |                |                |
+  osc.plug(this, "reload", "/device/4/component/Btn_MOVE");
+  osc.plug(this, "resetGyroRotation", "/device/4/component/Btn_SELECT");
+  osc.plug(this, "trigger", "/device/4/component/Btn_T");
+  osc.plug(this, "setGyroValue", "/device/4/component/GyroZ");
+  
   backgroundMusic = minim.loadFile( randTrack() );
   backgroundMusic.play();
   backgroundMusic.setGain(SOUNDTRACKGAIN);
@@ -61,24 +62,36 @@ void draw() {
   player.update();
   horde.update();
   radar.draw();
+  shotDelayCount++;
 }
 
-void setGyroValue(float val){
+void setGyroValue(float val) {
   player.directionSolver.setValue(val);
 }
 
-void resetGyroRotation(float button){
-  player.directionSolver.resetRotation(button);
+void resetGyroRotation(float button) {
+  if(shotDelayCount >= SHOOTDELAY) {
+    player.directionSolver.resetRotation(button);
+    shotDelayCount = 0;
+  }
 }
 
 void reload(float button){
-  if(button == 1.0)
-    player.reload();
+  if(shotDelayCount >= SHOOTDELAY) {
+    if(button == 1.0) {
+      player.reload();
+      shotDelayCount = 0;
+    }
+  }
 }
 
-void trigger(float trigger){
-  if(trigger > 0.0)
-    player.fire();
+void trigger(float trigger) {
+  if(shotDelayCount >= SHOOTDELAY) {
+    if(trigger > 0.0) {
+      player.fire();
+      shotDelayCount = 0;
+    }
+  }
 }
 
 void keyPressed() {
