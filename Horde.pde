@@ -25,6 +25,7 @@ class Horde {
           enemies.remove(e);
           player.weapon.bullets.remove(b);
           fx_die.trigger();
+          break;
         }
       }
     }
