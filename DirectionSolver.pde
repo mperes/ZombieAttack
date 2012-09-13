@@ -1,7 +1,7 @@
 class DirectionSolver{
   float value;
   float totalV;
-  int numReadings = 10;
+  int numReadings = 8;
   float runningTotal = 0;
   int thresh = 50;
   float[] readings = new float[numReadings];
@@ -41,6 +41,6 @@ class DirectionSolver{
   }
   
   float getDirection(){
-    return currentRot * -0.0000241;
+    return currentRot * -0.000042;
   }
 }

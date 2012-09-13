@@ -62,12 +62,13 @@ void setup() {
 
   // Listen to port
   osc = new OscP5(this, 12000);
+  String deviceNum = "6";
   // Osc plug      Function name      Plug name
   //  |                |                |
-  osc.plug(this, "reload", "/device/4/component/Btn_MOVE");
-  osc.plug(this, "resetGyroRotation", "/device/4/component/Btn_SELECT");
-  osc.plug(this, "trigger", "/device/4/component/Btn_T");
-  osc.plug(this, "setGyroValue", "/device/4/component/GyroZ");
+  osc.plug(this, "reload", "/device/"+deviceNum+"/component/Btn_MOVE");
+  osc.plug(this, "resetGyroRotation", "/device/"+deviceNum+"/component/Btn_SELECT");
+  osc.plug(this, "trigger", "/device/"+deviceNum+"/component/Btn_T");
+  osc.plug(this, "setGyroValue", "/device/"+deviceNum+"/component/GyroZ");
 
   backgroundMusic = minim.loadFile( randTrack() );
   backgroundMusic.play();
@@ -97,6 +98,7 @@ void draw() {
   case 3:
     break;
   }
+  
   shotDelayCount++;
 }
 
@@ -105,10 +107,7 @@ void setGyroValue(float val) {
 }
 
 void resetGyroRotation(float button) {
-  if (shotDelayCount >= SHOOTDELAY) {
-    player.directionSolver.resetRotation(button);
-    shotDelayCount = 0;
-  }
+  player.directionSolver.resetRotation(button);
 }
 
 void reload(float button) {
@@ -121,18 +120,18 @@ void reload(float button) {
 }
 
 void trigger(float trigger) {
-  if (shotDelayCount >= SHOOTDELAY) {
+  if (trigger > 0.0) {
     switch(scene) {
-    case 0:
-      scene = 1;
-      backgroundMusic.setGain(SOUNDTRACKGAIN);
-      break;
-    case 1:
-      if (trigger > 0.0) {
-        player.fire();
-        shotDelayCount = 0;
-      }
-      break;
+      case 0:
+        scene = 1;
+        backgroundMusic.setGain(SOUNDTRACKGAIN);
+        break;
+      case 1:
+        if(shotDelayCount >= SHOOTDELAY){
+          player.fire();
+          shotDelayCount = 0;
+        }
+        break;
     }
   }
 }
