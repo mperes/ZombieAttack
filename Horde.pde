@@ -27,9 +27,10 @@ class Horde {
       fx_die.add(minim.loadSample(enemy_deaths[x], SOUNDBUFFERSIZE));
     }
     fx_damage = minim.loadSample(SOUNDFXPATH+"player_hit1.mp3");
-    enemySprites = new PImage[2];
-    enemySprites[0] = loadImage(IMGPATH+"enemy_a.png");
-    enemySprites[1] = loadImage(IMGPATH+"enemy_b.png");
+    enemySprites = new PImage[3];
+    enemySprites[0] = loadImage(IMGPATH+"enemy_sprite_1.png");
+    enemySprites[1] = loadImage(IMGPATH+"enemy_sprite_2.png");
+    enemySprites[2] = loadImage(IMGPATH+"enemy_sprite_3.png");
     level = 0;
     lastWave = millis();
     lastSpawn = millis();
@@ -43,8 +44,8 @@ class Horde {
     
     //Enemy generation
     //int energy, float x, float y, float speed, float power, float awareness, int sprite
-    int levelEnergy = 1 + round(random(level));
-    float levelSpeed = 0.1 + random(level);
+    int levelEnergy = min( levelEnergy = 1 + round(random(level)),  5);
+    float levelSpeed = 0.25 + random(level);
     float levelPower = 5 + random(level);
     float levelAwareness = random(4)+random(level)+1;
     enemies.add(new Enemy(levelEnergy, spawnX, spawnY, levelSpeed, levelPower, levelAwareness, round(random(enemySprites.length-1)), round(random(enemy_deaths.length-1))));

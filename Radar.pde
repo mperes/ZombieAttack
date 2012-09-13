@@ -36,14 +36,22 @@ class Radar {
     drawPlayer();
     
     //Drawing enemies
-    fill(255, 0, 0);
     for(Enemy enemy : horde.enemies) {
       if( pow((enemy.position.x - width/2), 2) + pow((enemy.position.y - height/2), 2) < pow(RADARSIZE/2, 2)  ) {
-        //ellipse(enemy.position.x, enemy.position.y, ENEMYSIZE, ENEMYSIZE);
+        color colorWeak = color(140, 200, 60);
+        color colorStrong = color(200, 60, 60);
+        float mappedColor = map((float)enemy.energy, 1, 5, 0, 1);
+        color colorCurrent = lerpColor(colorWeak, colorStrong, mappedColor);
+        fill(colorCurrent);
         imageMode(CENTER);
+        rectMode(CENTER);
         tint(255, 255);
-        image(horde.enemySprites[enemy.sprite], round(enemy.position.x), round(enemy.position.y));
+        int posX = round(enemy.position.x);
+        int posY = round(enemy.position.y);
+        rect(posX, posY, 20, 20);
+        image(horde.enemySprites[enemy.sprite], posX, posY);
         imageMode(CORNER);
+        rectMode(CORNER);
       }
     }
     
@@ -68,6 +76,7 @@ class Radar {
     
     //Draw life bar
     drawPlayerStats();
+    
   }
   
   void drawPlayer() {
