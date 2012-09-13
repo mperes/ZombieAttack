@@ -12,13 +12,13 @@ class FogMachine{
   }
   
   void update(){
-    if(abs(pos.x) < fogImage.width - width){
+    if(abs(pos.x) < fogImage.width - width || pos.x < 0){
       pos.x += horizontalDirection;
     }else{
       horizontalDirection *= -1;
     }
     
-    if(abs(pos.y) < fogImage.height - height){
+    if(abs(pos.y) < fogImage.height - height || pos.y > 0 ){
       pos.y += verticalDirection;
     }else{
       verticalDirection *= -1;

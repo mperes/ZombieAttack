@@ -65,6 +65,7 @@ class Radar {
     
     fogMachine.update();
     fogMachine.draw();
+    
     imageMode(CENTER);
     image(sightMask, width/2, height/2);
     fill(0);
