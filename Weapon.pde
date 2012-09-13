@@ -7,6 +7,7 @@ class Weapon {
   int currentAmmo;
   ArrayList<Bullet> bullets;
   AudioSample fx_fire;
+  AudioSample fx_hit;
   AudioSample fx_jammed;
   AudioSample fx_reload;
   
@@ -17,9 +18,10 @@ class Weapon {
     this.ammo = ammo;
     this.currentAmmo = ammo;
     bullets = new ArrayList<Bullet>();
-    this.fx_fire = minim.loadSample(SOUNDFXPATH+name+"_fire.wav", 2048);
-    this.fx_jammed = minim.loadSample(SOUNDFXPATH+name+"_jammed.wav", 2048);
-    this.fx_reload = minim.loadSample(SOUNDFXPATH+name+"_reload.wav", 2048);
+    this.fx_fire = minim.loadSample(SOUNDFXPATH+name+"_fire.wav", SOUNDBUFFERSIZE);
+    this.fx_hit = minim.loadSample(SOUNDFXPATH+name+"_hit.wav", SOUNDBUFFERSIZE);
+    this.fx_jammed = minim.loadSample(SOUNDFXPATH+name+"_jammed.wav", SOUNDBUFFERSIZE);
+    this.fx_reload = minim.loadSample(SOUNDFXPATH+name+"_reload.wav", SOUNDBUFFERSIZE);
   }
   
   void fire(float x, float y, float direction) {
@@ -27,15 +29,12 @@ class Weapon {
       currentAmmo--;
       fx_fire.trigger();
       bullets.add(new Bullet(x, y, direction, this.range));
-      println("boom!");
     } else {
       fx_jammed.trigger();
-      println("Reload!");
     }
   }
   void reload() {
       currentAmmo = ammo;
       fx_reload.trigger();
-      println("Reloaded!");
   }
 }

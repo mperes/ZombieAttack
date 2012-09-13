@@ -7,6 +7,8 @@ class Player {
   PVector position;
   float facingDirection;
   int kills;
+  int score;
+  float survival;
   Weapon weapon;
   DirectionSolver directionSolver;
   
@@ -15,6 +17,8 @@ class Player {
     this.position = new PVector(x, y, 0.0);
     this.facingDirection = facingDirection;
     kills = 0;
+    score = 0;
+    survival = 0.0;
     energy = INITIALENERGY;
     currentEnergy = INITIALENERGY;
     this.weapon = weapon;

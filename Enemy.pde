@@ -5,14 +5,16 @@ class Enemy {
   float speed;
   float power;
   float awareness;
+  int sprite;
   AudioPlayer fx_move;
   
-  Enemy(int energy, float x, float y, float speed, float power, float awareness) {
+  Enemy(int energy, float x, float y, float speed, float power, float awareness, int sprite) {
     this.energy = energy;
     this.position = new PVector(x, y, 0.0);
     this.speed = speed;
     this.power = power;
     this.awareness = awareness;
+    this.sprite = sprite;
     fx_move = minim.loadFile(SOUNDFXPATH+"enemy_move.wav");
   }
   
@@ -40,14 +42,6 @@ class Enemy {
         if(audioAngle < 0) { audioAngle = 360 - abs(audioAngle); }
         float pan = sin(radians(audioAngle));
 
-        /*
-        println("Player angle: "+playerAngle);
-        println("Enemy angle: "+enemyAngle);
-        println("Audio angle: "+audioAngle);
-        println("pan angle: "+pan);
-        println("------------");
-        */
-
         fx_move.setGain(gain);
         fx_move.setPan(pan);
 
@@ -58,6 +52,10 @@ class Enemy {
   
   void die() {
     fx_move.close();
+  }
+  
+  int getScore() {
+    return round(speed * power * awareness);
   }
   
 }
