@@ -106,7 +106,7 @@ void reload(float button) {
   if (shotDelayCount >= SHOOTDELAY) {
     if (button == 1.0) {
       player.reload();
-      shotDelayCount = 0;
+      shotDelayCount = 20;
     }
   }
 }
@@ -117,6 +117,8 @@ void trigger(float trigger) {
       case 0:
         scene = 1;
         backgroundMusic.setGain(SOUNDTRACKGAIN);
+        player.weapon.fx_reload.trigger();
+        shotDelayCount = 0;
         break;
       case 1:
         if(shotDelayCount >= SHOOTDELAY){
@@ -136,6 +138,7 @@ void keyPressed() {
       case 0:
         scene = 1;
         backgroundMusic.setGain(SOUNDTRACKGAIN);
+        shotDelayCount = 0;
         break;
       case 1:
         player.fire();
