@@ -5,7 +5,6 @@ class Radar {
   PImage lifebar;
   PImage shellcase;
   PImage sightMask;
-  PImage stage;
   
   Radar(Horde horde) {
     this.horde = horde;
@@ -13,7 +12,6 @@ class Radar {
     lifebar = loadImage(IMGPATH+"lifebar.png");
     shellcase = loadImage(IMGPATH+"shellcase.png");
     sightMask = loadImage(IMGPATH+"sightmask.png");
-    stage = loadImage(IMGPATH+"stage.png");
   }
   
   void draw() {
@@ -22,7 +20,7 @@ class Radar {
     strokeWeight(2);
     noFill();
     ellipseMode(CENTER);
-    image(stage, 0, 0);
+    floorGenerator.draw();
     //ellipse(width/2, height/2, RADARSIZE, RADARSIZE);
    
     //Drawing hearing distance
@@ -59,7 +57,14 @@ class Radar {
     
     fogMachine.update();
     fogMachine.draw();
-    image(sightMask, 0, 0);
+    imageMode(CENTER);
+    image(sightMask, width/2, height/2);
+    fill(0);
+    rect(0, 0, (width-sightMask.width)/2, height);
+    rect(width/2+sightMask.width/2, 0, (width-sightMask.width)/2, height);
+    rect(0, 0, width, (height-sightMask.height)/2);
+    rect(0, height/2+sightMask.height/2, width, (height-sightMask.height)/2);
+    imageMode(CORNER);
     
     //Draw life bar
     drawPlayerStats();
