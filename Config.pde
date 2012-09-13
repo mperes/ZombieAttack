@@ -1,3 +1,7 @@
+//Resolutions
+final int MAPWIDTH = 800;
+final int MAPHEIGHT = 480;
+
 //Path to sound effect files. This path is relative to /Data
 final String SOUNDFXPATH = "soundfx/";
 final String SOUNDTRACKPATH = "soundtrack/Blood/";
@@ -7,7 +11,7 @@ final int SOUNDBUFFERSIZE = 256;
 final String IMGPATH = "images/";
 
 //Player energy
-final int INITIALENERGY = 100;
+final int INITIALENERGY = 5;
 
 //Player energy
 final int HEARINGDISTANCE = 200;
@@ -34,5 +38,7 @@ final int WAVEDURATION = 120 * 1000;
 final int WAVESPAWN = 10 * 1000;
 
 //Score board path;
-final String SCOREBOARDFILE = "/scoreboard/scoreboard.dat";
-final int SCORESDISPLAYED = 10;
+final String SCOREBOARDFILE = "scoreboard/scoreboard.csv";
+final int SCORESLINEHEIGHT = 50;
+final int SCORESDISPLAYED = MAPHEIGHT / SCORESLINEHEIGHT - 1;
+
