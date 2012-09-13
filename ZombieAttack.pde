@@ -51,7 +51,6 @@ void setup() {
   String deviceNum = "6";
   // Osc plug      Function name      Plug name
   //  |                |                |
-<<<<<<< HEAD
   osc.plug(this, "reload", "/device/"+deviceNum+"/component/Btn_MOVE");
   osc.plug(this, "resetGyroRotation", "/device/"+deviceNum+"/component/Btn_SELECT");
   osc.plug(this, "trigger", "/device/"+deviceNum+"/component/Btn_T");
@@ -59,20 +58,6 @@ void setup() {
 
   backgroundMusic = minim.loadFile( randTrack() );
   backgroundMusic.play();
-
-  scene = 2;
-  splashScreen = new SplashScreen();
-  scoreBoard = new ScoreBoard();
-  
-  println(SCORESDISPLAYED);
-  println(height);
-  println(height/50);
-=======
-  osc.plug(this, "reload", "/device/4/component/Btn_MOVE");
-  osc.plug(this, "resetGyroRotation", "/device/4/component/Btn_SELECT");
-  osc.plug(this, "trigger", "/device/4/component/Btn_T");
-  osc.plug(this, "setGyroValue", "/device/4/component/GyroZ");
->>>>>>> ScoreBoard focus on current player, reset game to first screen.
 }
 
 void draw() {
