@@ -1,24 +1,25 @@
 class SplashScreen {
   
-  PImage splashScreenBackground;
+  PImage splashScreenTitle;
   PImage splashScreenStart;
 
   SplashScreen() {
-      splashScreenBackground = loadImage(IMGPATH+"splashscreen-background.png");
+      splashScreenTitle = loadImage(IMGPATH+"splashscreen-title.png");
       splashScreenStart = loadImage(IMGPATH+"splashscreen-start.png");
   }
   
   void draw() {
     background(0);
-    
+    pushMatrix();
+    imageMode(CENTER);
+    translate(width/2, height/2);
     tint(255, 255);
-    image(splashScreenBackground, 0, 0);
+    image(splashScreenTitle, 0, -splashScreenTitle.height/2);
     
-    int startX = width/2 - splashScreenStart.width/2;
-    int startY = height - splashScreenStart.height*2;
     float startOpacity = abs(sin(radians(millis()/10))) * 255;
     tint(255, startOpacity);
-    image(splashScreenStart, startX, startY);   
+    image(splashScreenStart, 0, splashScreenStart.height*2);   
+    popMatrix();
   }
   
 }

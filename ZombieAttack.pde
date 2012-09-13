@@ -12,6 +12,7 @@ Horde horde;
 Radar radar;
 SplashScreen splashScreen;
 ScoreBoard scoreBoard;
+FloorGenerator floorGenerator;
 
 int shotDelayCount = 0;
 float scoreBoardDisplayedFor;
@@ -43,6 +44,8 @@ void setup() {
   smooth();
 
   minim = new Minim(this);
+  
+  floorGenerator = new FloorGenerator(MAPWIDTH, MAPHEIGHT);
 
   resetGame();
 
