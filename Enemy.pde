@@ -6,15 +6,18 @@ class Enemy {
   float power;
   float awareness;
   int sprite;
+  int death_sound;
   AudioPlayer fx_move;
   
-  Enemy(int energy, float x, float y, float speed, float power, float awareness, int sprite) {
+  
+  Enemy(int energy, float x, float y, float speed, float power, float awareness, int sprite, int death_sound) {
     this.energy = energy;
     this.position = new PVector(x, y, 0.0);
     this.speed = speed;
     this.power = power;
     this.awareness = awareness;
     this.sprite = sprite;
+    this.death_sound = death_sound;
     fx_move = minim.loadFile(SOUNDFXPATH+"enemy_move.wav");
   }
   
