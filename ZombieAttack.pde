@@ -11,6 +11,8 @@ Shotgun shotgun;
 Horde horde;
 Radar radar;
 SplashScreen splashScreen;
+PFont fontRegular;
+PFont fontBold;
 
 int shotDelayCount = 0;
 
@@ -39,6 +41,9 @@ String[] soundtracks = {
 void setup() {
   size(800, 480);
   smooth();
+  
+  fontRegular = loadFont("fonts/CellularTall-48.vlw");
+  fontBold = loadFont("fonts/CellularTall-Bold-48.vlw");
 
   minim = new Minim(this);
 

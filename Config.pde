@@ -32,3 +32,7 @@ final int WAVEDURATION = 120 * 1000;
 
 //Spawn interval of the wave in millis;
 final int WAVESPAWN = 10 * 1000;
+
+//Score board path;
+final String SCOREBOARDFILE = "/scoreboard/scoreboard.dat";
+final int SCORESDISPLAYED = 10;
