@@ -3,8 +3,9 @@ class ScoreBoard {
   String[] scoresFile;
   ArrayList<Score> scores;
   PFont scoreFont;
+  Player player;
   
-  ScoreBoard() {
+  ScoreBoard(Player player) {
     scoresFile = loadStrings(SCOREBOARDFILE);
     scores = new ArrayList<Score>();
     for(String scoreEntry : scoresFile) {
@@ -12,11 +13,13 @@ class ScoreBoard {
       scores.add(new Score(
         Integer.parseInt(data[0]),
         Float.parseFloat(data[1]),
-        Integer.parseInt(data[2])
+        Integer.parseInt(data[2]),
+        UUID.fromString(data[3])
       ));
     }
     Collections.sort(scores);
     scoreFont = loadFont("fonts/ProggyOptiS-36.vlw");
+    this.player = player;
   }
   
   void draw() {
@@ -29,19 +32,27 @@ class ScoreBoard {
     for(int i=0; i<SCORESDISPLAYED; i++) {
       if(i < scores.size()) {
         Score scoreEntry = scores.get(i);
-        shadowedText(Integer.toString(scoreEntry.score), 0, SCORESLINEHEIGHT + SCORESLINEHEIGHT*i, 200);
-        shadowedText(Integer.toString(scoreEntry.kills), 300, SCORESLINEHEIGHT + SCORESLINEHEIGHT*i, 200);
-        shadowedText(scoreEntry.getTime(), 600, SCORESLINEHEIGHT + SCORESLINEHEIGHT*i, 200);
+        if(scoreEntry.playerID.equals(player.id)) {
+          int currentColor = round(abs( sin(radians(millis()/10))*255 ));
+          shadowedText(Integer.toString(scoreEntry.score), 0, SCORESLINEHEIGHT + SCORESLINEHEIGHT*i, currentColor);
+          shadowedText(Integer.toString(scoreEntry.kills), 300, SCORESLINEHEIGHT + SCORESLINEHEIGHT*i, currentColor);
+          shadowedText(scoreEntry.getTime(), 600, SCORESLINEHEIGHT + SCORESLINEHEIGHT*i, currentColor);
+        } else {
+          shadowedText(Integer.toString(scoreEntry.score), 0, SCORESLINEHEIGHT + SCORESLINEHEIGHT*i, 150);
+          shadowedText(Integer.toString(scoreEntry.kills), 300, SCORESLINEHEIGHT + SCORESLINEHEIGHT*i, 150);
+          shadowedText(scoreEntry.getTime(), 600, SCORESLINEHEIGHT + SCORESLINEHEIGHT*i, 150);
+        }
       }
     }
     popMatrix();
   }
   
-  void addScore(int score, float time, int kills) {
+  void addScore() {
     scores.add(new Score(
-      score,
-      time,
-      kills
+      player.score,
+      millis()-player.survival,
+      player.kills,
+      player.id
     ));
     Collections.sort(scores);
     saveScores();
@@ -66,9 +77,9 @@ class ScoreBoard {
   
   void shadowedText(String shadowtext, int x, int y, int bw) {
     noStroke();
-    fill(bw-100);
+    fill(max(bw-100, 0));
     text(shadowtext, x+2, y+2);
-    fill(bw);
+    fill(max(bw, 0));
     text(shadowtext, x, y);
   }
   

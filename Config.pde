@@ -41,4 +41,5 @@ final int WAVESPAWN = 10 * 1000;
 final String SCOREBOARDFILE = "scoreboard/scoreboard.csv";
 final int SCORESLINEHEIGHT = 50;
 final int SCORESDISPLAYED = MAPHEIGHT / SCORESLINEHEIGHT - 1;
+final int SCOREBOARDDISPLAYTIME = 10 * 1000; //In millis
 

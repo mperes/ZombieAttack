@@ -1,5 +1,5 @@
 class Player {
-  
+  import java.util.UUID; 
   
   String name;
   int energy;
@@ -10,6 +10,7 @@ class Player {
   int score;
   float survival;
   Weapon weapon;
+  UUID id;
   DirectionSolver directionSolver;
   
   Player(String name, float x, float y, float facingDirection, Weapon weapon) {
@@ -22,6 +23,7 @@ class Player {
     energy = INITIALENERGY;
     currentEnergy = INITIALENERGY;
     this.weapon = weapon;
+    id = UUID.randomUUID();
     directionSolver = new DirectionSolver();
   }
   

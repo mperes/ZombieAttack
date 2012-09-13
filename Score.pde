@@ -1,13 +1,16 @@
 class Score implements Comparable<Score> {
+  import java.util.UUID; 
   
   float time;
   int score;
-  int kills; 
+  int kills;
+  UUID playerID; 
   
-  Score(int score, float time, int kills) {
+  Score(int score, float time, int kills, UUID playerID) {
     this.score = score;
     this.time = time;
     this.kills = kills;
+    this.playerID = playerID;
   }
   
   String getTime() {
@@ -24,7 +27,7 @@ class Score implements Comparable<Score> {
   }
   
   String asCSV() {
-    return score + ";" + time + ";" + kills; 
+    return score + ";" + time + ";" + kills + ";" + playerID.toString(); 
   }
   
 }

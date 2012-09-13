@@ -14,6 +14,7 @@ SplashScreen splashScreen;
 ScoreBoard scoreBoard;
 
 int shotDelayCount = 0;
+float scoreBoardDisplayedFor;
 
 /*
 This is used to hold the state of the game:
@@ -43,24 +44,14 @@ void setup() {
 
   minim = new Minim(this);
 
-  //Weapon creation
-  shotgun = new Shotgun();
-
-  //Player creation: Name, X Pos, Y Pos, Initial direction, Initial weapon.
-  player = new Player("Miguel", width/2, height/2, 0.0, shotgun);
-
-  horde = new Horde(player);
-  for (int x=0; x<5; x++) {
-    horde.spawn();
-  }
-
-  radar = new Radar(horde);
+  resetGame();
 
   // Listen to port
   osc = new OscP5(this, 12000);
   String deviceNum = "6";
   // Osc plug      Function name      Plug name
   //  |                |                |
+<<<<<<< HEAD
   osc.plug(this, "reload", "/device/"+deviceNum+"/component/Btn_MOVE");
   osc.plug(this, "resetGyroRotation", "/device/"+deviceNum+"/component/Btn_SELECT");
   osc.plug(this, "trigger", "/device/"+deviceNum+"/component/Btn_T");
@@ -76,6 +67,12 @@ void setup() {
   println(SCORESDISPLAYED);
   println(height);
   println(height/50);
+=======
+  osc.plug(this, "reload", "/device/4/component/Btn_MOVE");
+  osc.plug(this, "resetGyroRotation", "/device/4/component/Btn_SELECT");
+  osc.plug(this, "trigger", "/device/4/component/Btn_T");
+  osc.plug(this, "setGyroValue", "/device/4/component/GyroZ");
+>>>>>>> ScoreBoard focus on current player, reset game to first screen.
 }
 
 void draw() {
@@ -86,8 +83,9 @@ void draw() {
   case 1:
     if(player.currentEnergy <= 0) {
       //(int score, float time, int kills)
-      scoreBoard.addScore(player.score, millis()-player.survival, player.kills);
+      scoreBoard.addScore();
       scene = 2;
+      scoreBoardDisplayedFor = millis();
     } else {
       background(0);
       player.update();
@@ -96,10 +94,12 @@ void draw() {
     }
     break;
   case 2:
-    background(0);
-    scoreBoard.draw();
-    break;
-  case 3:
+    if(millis()-scoreBoardDisplayedFor >= SCOREBOARDDISPLAYTIME) {
+      resetGame();
+    } else {
+      background(0);
+      scoreBoard.draw();
+    }
     break;
   }
   
@@ -196,5 +196,27 @@ void updateTrack() {
     backgroundMusic.play();
     backgroundMusic.setGain(SOUNDTRACKGAIN);
   }
+}
+
+void resetGame() {
+    //Weapon creation
+  shotgun = new Shotgun();
+  
+  //Player creation: Name, X Pos, Y Pos, Initial direction, Initial weapon.
+  player = new Player("Miguel", width/2, height/2, 0.0, shotgun);
+
+  horde = new Horde(player);
+  for (int x=0; x<5; x++) {
+    horde.spawn();
+  }
+
+  radar = new Radar(horde);
+  
+  backgroundMusic = minim.loadFile( randTrack() );
+  backgroundMusic.play();
+
+  scene = 0;
+  splashScreen = new SplashScreen();
+  scoreBoard = new ScoreBoard(player);
 }
 
