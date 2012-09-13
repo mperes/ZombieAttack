@@ -155,10 +155,10 @@ void keyPressed() {
     }
     break;  
   case 37:
-    player.directionSolver.setValue(500);
+    player.directionSolver.setValue(1000);
     break;
   case 39:
-    player.directionSolver.setValue(-500);
+    player.directionSolver.setValue(-1000);
     break;
   default:
     break;
