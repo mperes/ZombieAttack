@@ -11,7 +11,7 @@ final int SOUNDBUFFERSIZE = 256;
 final String IMGPATH = "images/";
 
 //Player energy
-final int INITIALENERGY = 5;
+final int INITIALENERGY = 100;
 
 //Player energy
 final int HEARINGDISTANCE = 200;
@@ -32,7 +32,7 @@ final int SHOOTDELAY = 50;
 final int PLAYERSIZE = 10;
 
 //Duration of the wave in millis;
-final int WAVEDURATION = 120 * 1000;
+final int WAVEDURATION = 60 * 1000;
 
 //Spawn interval of the wave in millis;
 final int WAVESPAWN = 10 * 1000;
