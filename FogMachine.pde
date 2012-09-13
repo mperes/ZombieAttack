@@ -3,26 +3,24 @@ class FogMachine{
   PImage fogImage;
   PImage fog;
   PVector pos;
-  int verticalDirection = -1;
-  int horizontalDirection = -2;
+  int vD = -1;
+  int hD = -2;
   
   FogMachine(){
     fogImage = loadImage(IMGPATH+"fog.png");
-    pos = new PVector(0,0);
+    pos = new PVector(-5,-5);
   }
   
   void update(){
-    if(abs(pos.x) < fogImage.width - width || pos.x < 0){
-      pos.x += horizontalDirection;
-    }else{
-      horizontalDirection *= -1;
-    }
-    
-    if(abs(pos.y) < fogImage.height - height || pos.y > 0 ){
-      pos.y += verticalDirection;
-    }else{
-      verticalDirection *= -1;
-    }
+    if((pos.x + hD < 0) && (pos.x + hD) > (width - fogImage.width))
+     pos.x += hD;
+   else
+     hD *= -1;
+     
+   if((pos.y + vD < 0) && (pos.y + vD) > (height - fogImage.height))
+     pos.y += vD;
+   else
+     vD *= -1;
   }
   
   void draw(){

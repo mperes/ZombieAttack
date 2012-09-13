@@ -4,8 +4,8 @@ final int MAPHEIGHT = 768;
 
 //Path to sound effect files. This path is relative to /Data
 final String SOUNDFXPATH = "soundfx/";
-final String SOUNDTRACKPATH = "soundtrack/Blood/";
-final float SOUNDTRACKGAIN = -25;
+final String SOUNDTRACKPATH = "soundtracklow/Blood/";
+final float SOUNDTRACKGAIN = -25.0;
 final int SOUNDBUFFERSIZE = 256; 
 
 final String IMGPATH = "images/";
@@ -23,10 +23,10 @@ final int ENEMYSIZE = 20;
 final int RADARSIZE = 450;
 
 //Speed of the bullets
-final int BULLETSPEED = 3;
+final int BULLETSPEED = 8;
 
 //Shot delay in frames;
-final int SHOOTDELAY = 50;
+final int SHOOTDELAY = 30;
 
 //This is used to calculate the player hit area;
 final int PLAYERSIZE = 10;

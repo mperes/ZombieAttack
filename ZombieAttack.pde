@@ -29,14 +29,14 @@ int scene;
 
 AudioPlayer backgroundMusic;
 String[] soundtracks = {
-  "1 - Pestis Cruento.MP3", 
-  "2 - Unholy Voices.MP3", 
-  "3 - Dark Carnival.MP3", 
-  "4 - Infuscomus.MP3", 
-  "5 - Father Time.MP3", 
-  "6 - Waiting For The End.MP3", 
-  "7 - Fate Of The Damned.MP3", 
-  "8 - Double, Double, Toil and Trouble.MP3"
+  "1 - Pestis Cruento.mp3", 
+  "2 - Unholy Voices.mp3", 
+  "3 - Dark Carnival.mp3", 
+  "4 - Infuscomus.mp3", 
+  "5 - Father Time.mp3", 
+  "6 - Waiting For The End.mp3", 
+  "7 - Fate Of The Damned.mp3", 
+  "8 - Double, Double, Toil and Trouble.mp3"
 };
 
 void setup() {
@@ -106,7 +106,7 @@ void reload(float button) {
   if (shotDelayCount >= SHOOTDELAY) {
     if (button == 1.0) {
       player.reload();
-      shotDelayCount = 20;
+      shotDelayCount = 0;
     }
   }
 }
@@ -116,9 +116,7 @@ void trigger(float trigger) {
     switch(scene) {
       case 0:
         scene = 1;
-        backgroundMusic.setGain(SOUNDTRACKGAIN);
-        player.weapon.fx_reload.trigger();
-        shotDelayCount = 0;
+        //backgroundMusic.setGain(SOUNDTRACKGAIN);
         break;
       case 1:
         if(shotDelayCount >= SHOOTDELAY){
@@ -137,8 +135,7 @@ void keyPressed() {
       switch(scene) {
       case 0:
         scene = 1;
-        backgroundMusic.setGain(SOUNDTRACKGAIN);
-        shotDelayCount = 0;
+        //backgroundMusic.setGain(SOUNDTRACKGAIN);
         break;
       case 1:
         player.fire();
@@ -185,7 +182,7 @@ void updateTrack() {
   if (!backgroundMusic.isPlaying()) {
     backgroundMusic = minim.loadFile( randTrack() );
     backgroundMusic.play();
-    backgroundMusic.setGain(SOUNDTRACKGAIN);
+    //backgroundMusic.setGain(SOUNDTRACKGAIN);
   }
 }
 
