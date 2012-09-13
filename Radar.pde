@@ -1,6 +1,7 @@
 class Radar {
   
   Horde horde;
+  FogMachine fogMachine;
   PImage lifebar;
   PImage shellcase;
   PImage sightMask;
@@ -8,6 +9,7 @@ class Radar {
   
   Radar(Horde horde) {
     this.horde = horde;
+    this.fogMachine = new FogMachine();
     lifebar = loadImage(IMGPATH+"lifebar.png");
     shellcase = loadImage(IMGPATH+"shellcase.png");
     sightMask = loadImage(IMGPATH+"sightmask.png");
@@ -55,6 +57,8 @@ class Radar {
       }
     }
     
+    fogMachine.update();
+    fogMachine.draw();
     image(sightMask, 0, 0);
     
     //Draw life bar
