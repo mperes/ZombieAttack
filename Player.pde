@@ -18,7 +18,7 @@ class Player {
     this.facingDirection = facingDirection;
     kills = 0;
     score = 0;
-    survival = 0.0;
+    survival = millis();
     energy = INITIALENERGY;
     currentEnergy = INITIALENERGY;
     this.weapon = weapon;

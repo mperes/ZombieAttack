@@ -11,8 +11,7 @@ Shotgun shotgun;
 Horde horde;
 Radar radar;
 SplashScreen splashScreen;
-PFont fontRegular;
-PFont fontBold;
+ScoreBoard scoreBoard;
 
 int shotDelayCount = 0;
 
@@ -39,11 +38,8 @@ String[] soundtracks = {
 };
 
 void setup() {
-  size(800, 480);
+  size(MAPWIDTH, MAPHEIGHT);
   smooth();
-  
-  fontRegular = loadFont("fonts/CellularTall-48.vlw");
-  fontBold = loadFont("fonts/CellularTall-Bold-48.vlw");
 
   minim = new Minim(this);
 
@@ -73,8 +69,13 @@ void setup() {
   backgroundMusic = minim.loadFile( randTrack() );
   backgroundMusic.play();
 
-  scene = 0;
+  scene = 2;
   splashScreen = new SplashScreen();
+  scoreBoard = new ScoreBoard();
+  
+  println(SCORESDISPLAYED);
+  println(height);
+  println(height/50);
 }
 
 void draw() {
@@ -84,6 +85,8 @@ void draw() {
     break;
   case 1:
     if(player.currentEnergy <= 0) {
+      //(int score, float time, int kills)
+      scoreBoard.addScore(player.score, millis()-player.survival, player.kills);
       scene = 2;
     } else {
       background(0);
@@ -94,6 +97,7 @@ void draw() {
     break;
   case 2:
     background(0);
+    scoreBoard.draw();
     break;
   case 3:
     break;
