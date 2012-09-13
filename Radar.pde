@@ -5,6 +5,7 @@ class Radar {
   PImage lifebar;
   PImage shellcase;
   PImage sightMask;
+  PImage playerSprite;
   
   Radar(Horde horde) {
     this.horde = horde;
@@ -12,6 +13,7 @@ class Radar {
     lifebar = loadImage(IMGPATH+"lifebar.png");
     shellcase = loadImage(IMGPATH+"shellcase.png");
     sightMask = loadImage(IMGPATH+"sightmask.png");
+    playerSprite = loadImage(IMGPATH+"player.png");
   }
   
   void draw() {
@@ -29,9 +31,17 @@ class Radar {
     ellipseMode(CENTER);
     //ellipse(width/2, height/2, HEARINGDISTANCE*2, HEARINGDISTANCE*2); 
     
+    //Drawing bullets
+    fill(255);
+    for(Bullet bullet : horde.player.weapon.bullets) {
+      if( pow((bullet.position.x - width/2), 2) + pow((bullet.position.y - height/2), 2) < pow(RADARSIZE/2, 2)  ) {
+        ellipse(bullet.position.x, bullet.position.y, 5, 5);
+      }
+    }
+    
     //Drawing player
     noStroke();
-    fill(0, 0, 255);
+    fill(255, 0, 0);
     //ellipse(horde.player.position.x, horde.player.position.y, 5, 5);
     drawPlayer();
     
@@ -52,14 +62,6 @@ class Radar {
         image(horde.enemySprites[enemy.sprite], posX, posY);
         imageMode(CORNER);
         rectMode(CORNER);
-      }
-    }
-    
-    //Drawing bullets
-    fill(255);
-    for(Bullet bullet : horde.player.weapon.bullets) {
-      if( pow((bullet.position.x - width/2), 2) + pow((bullet.position.y - height/2), 2) < pow(RADARSIZE/2, 2)  ) {
-        ellipse(bullet.position.x, bullet.position.y, 5, 5);
       }
     }
     
@@ -86,17 +88,23 @@ class Radar {
     float y = horde.player.position.y;
     pushMatrix();
     translate(x, y);
-    scale(3);
+    imageMode(CENTER);
+    image(playerSprite, 0, 0);
+    imageMode(CORNER);
+    scale(0.75);
     rotate(player.facingDirection);
+    
     beginShape();
-      vertex(0, -5);
-      vertex(5, 5);
-      vertex(-5, 5);
+      vertex(0, -30);
+      vertex(5, -20);
+      vertex(-5, -20);
+      vertex(0, -30);
       //vertex( cos(0+horde.player.facingDirection)*playerSize+horde.player.position.x, sin(0+horde.player.facingDirection)*playerSize+horde.player.position.y);
       //vertex( cos(2*PI/3+horde.player.facingDirection)*playerSize+horde.player.position.x, sin(120+horde.player.facingDirection)*playerSize+horde.player.position.y);
       //vertex( cos(4*PI/3+horde.player.facingDirection)*-playerSize+horde.player.position.x, sin(240+horde.player.facingDirection)*playerSize+horde.player.position.y);
-    endShape(CLOSE);
+    endShape();
     popMatrix();
+    drawEyes(width/2-4, height/2-2, player.facingDirection);
   }
   
   void drawPlayerStats() {
@@ -116,8 +124,33 @@ class Radar {
       for(int i=0; i<horde.player.weapon.currentAmmo; i++) {
         image(shellcase, (shellcase.width+5)*i, lifebar.height+10);
       }
-    popMatrix(); 
+    popMatrix();   
+  }
+  
+  void drawEyes(float x, float y, float angle) {   
+    angle -= PI/2;
     
+    pushMatrix();
+    translate(x, y);
+    fill(255);
+    ellipseMode(CENTER);
+    ellipse(0, 0, 6, 6);
+    fill(0);
+    float eyeBallX = cos(angle) * 2;
+    float eyeBallY = sin(angle) * 2;
+    ellipse(eyeBallX, eyeBallY, 2, 2);
+    popMatrix();
+    
+    pushMatrix();
+    translate(x+8, y);
+    fill(255);
+    ellipse(0, 0, 6, 6);
+    fill(0);
+    eyeBallX = cos(angle) * 2;
+    eyeBallY = sin(angle) * 2;
+    ellipse(eyeBallX, eyeBallY, 2, 2);
+    ellipseMode(CORNER);
+    popMatrix();
   }
   
 }
