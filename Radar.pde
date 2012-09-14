@@ -50,12 +50,10 @@ class Radar {
     //Drawing dead enemies
     for(DeadZombie dz: horde.deadZombies){
       pushMatrix();
-        imageMode(CENTER);
-//        tint(255, round(dz.stayCounter/255));
-        
+        imageMode(CENTER);        
         tint(255, round( map( dz.stayCounter,0, 50, 255, 0 ) ) );
-                
         image(deadZombie, dz.pos.x, dz.pos.y);
+        tint(255, 255);
       popMatrix();
     }
     
