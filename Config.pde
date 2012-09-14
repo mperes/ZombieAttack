@@ -1,6 +1,6 @@
 //Resolutions
-final int MAPWIDTH = 1024;
-final int MAPHEIGHT = 768;
+final int MAPWIDTH = 1280;
+final int MAPHEIGHT = 800;
 
 //Path to sound effect files. This path is relative to /Data
 final String SOUNDFXPATH = "soundfx/";

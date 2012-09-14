@@ -1,7 +1,9 @@
+import fullscreen.*; 
 import ddf.minim.*;
 import oscP5.*;
 import netP5.*;
 
+FullScreen fs;
 OscP5 osc;
 
 Minim minim; //Global sound object
@@ -61,6 +63,9 @@ void setup() {
 
   backgroundMusic = minim.loadFile( randTrack() );
   backgroundMusic.play();
+  
+  fs = new FullScreen(this); 
+  fs.enter(); 
 }
 
 void draw() {
