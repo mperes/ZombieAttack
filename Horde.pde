@@ -83,17 +83,14 @@ class Horde {
             fx_die.get(enemy.death_sound).trigger();
             player.kills++;
             player.score =+ enemy.getScore();
-            
             enemy.die();
-            if(enemy.death_counter > ENEMYCORPSESTAY){
-              enemies.remove(e);
-            }
+            enemies.remove(e);
           }
           break;
         }
       }
     }
-    for(int e=0; e<enemies.size(); e++) {//enemy attacks player
+    for(int e=0; e<enemies.size(); e++) {
       Enemy enemy = enemies.get(e);
       enemy.update(player);
       if( pow((enemy.position.x-player.position.x), 2) + pow((enemy.position.y - player.position.y), 2) < pow(PLAYERSIZE, 2)  ) {

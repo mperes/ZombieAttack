@@ -5,8 +5,6 @@ class Enemy {
   float speed;
   float power;
   float awareness;
-  Boolean alive = true;
-  int death_counter = 0;
   int sprite;
   int death_sound;
   AudioPlayer fx_move;
@@ -32,10 +30,6 @@ class Enemy {
         position.set(newX, newY, 0.0);
         updateAudio(player);
       }
-      
-      if(!this.alive){
-        death_counter++;
-      }
   }
   
   void updateAudio(Player player) {
@@ -53,13 +47,13 @@ class Enemy {
 
         fx_move.setGain(gain);
         fx_move.setPan(pan);
+
       } else {
         fx_move.pause();
       }
   }
   
   void die() {
-    this.alive = false;
     fx_move.close();
   }
   
