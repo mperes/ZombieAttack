@@ -19,6 +19,9 @@ final int HEARINGDISTANCE = 200;
 //Enemy size in the radar
 final int ENEMYSIZE = 20;
 
+//How long blood stays on the screen
+final int ENEMYCORPSESTAY = 50;
+
 //Size of the radar;
 final int RADARSIZE = 450;
 
