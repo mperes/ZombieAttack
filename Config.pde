@@ -4,7 +4,7 @@ final int MAPHEIGHT = 768;
 
 //Path to sound effect files. This path is relative to /Data
 final String SOUNDFXPATH = "soundfx/";
-final String SOUNDTRACKPATH = "soundtracklow/Blood/";
+final String SOUNDTRACKPATH = "soundtrack/Blood/";
 final float SOUNDTRACKGAIN = -25.0;
 final int SOUNDBUFFERSIZE = 256; 
 
