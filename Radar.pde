@@ -59,7 +59,12 @@ class Radar {
         int posX = round(enemy.position.x);
         int posY = round(enemy.position.y);
         rect(posX, posY, 20, 20);
-        image(horde.enemySprites[enemy.sprite], posX, posY);
+        if(enemy.alive){
+          image(horde.enemySprites[enemy.sprite], posX, posY);
+        }else{
+          //draw blood
+          println("dead");
+        }
         imageMode(CORNER);
         rectMode(CORNER);
       }
