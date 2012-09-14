@@ -51,9 +51,9 @@ class Horde {
     //Enemy generation
     //int energy, float x, float y, float speed, float power, float awareness, int sprite
     int levelEnergy = min( levelEnergy = 1 + round(random(level)),  5);
-    float levelSpeed = 0.25 + random(level);
+    float levelSpeed = 20;//0.25 + random(level);
     float levelPower = 5 + random(level);
-    float levelAwareness = random(4)+random(level)+1;
+    float levelAwareness = 100;//random(4)+random(level)+1;
     enemies.add(new Enemy(levelEnergy, spawnX, spawnY, levelSpeed, levelPower, levelAwareness, round(random(enemySprites.length-1)), round(random(enemy_deaths.length-1))));
   }
   

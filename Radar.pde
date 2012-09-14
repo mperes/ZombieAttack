@@ -123,19 +123,15 @@ class Radar {
   }
   
   void drawPlayerStats() {
-    int barWidth = 198;
-    int barHeight = 18;
-    float barCurrent = round((float)horde.player.currentEnergy / (float)horde.player.energy * (float)barWidth);
-    color colorFull = color(140, 200, 60);
-    color colorDying = color(200, 60, 60);
-    color colorCurrent = lerpColor(colorDying, colorFull, (float)horde.player.currentEnergy / (float)horde.player.energy);
+    int barWidth = 200;
+    int barHeight = 12;
+    float barCurrent = (float)horde.player.currentEnergy / (float)horde.player.energy;
     tint(255, 255);
     pushMatrix();
-      translate(10, 10);
+      translate(50, 50);
       noStroke();
-      fill(colorCurrent);
-      rect(3, 3, barCurrent, barHeight);
-      image(lifebar, 0, 0);
+      println(barWidth);
+      image(lifebar, 0, 0, round(barWidth*barCurrent) , barHeight);
       for(int i=0; i<horde.player.weapon.currentAmmo; i++) {
         image(shellcase, (shellcase.width+5)*i, lifebar.height+10);
       }
