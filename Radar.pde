@@ -28,10 +28,10 @@ class Radar {
     //ellipse(width/2, height/2, RADARSIZE, RADARSIZE);
    
     //Drawing hearing distance
-    stroke(200);
+    stroke(255, 20);
     noFill();
     ellipseMode(CENTER);
-    //ellipse(width/2, height/2, HEARINGDISTANCE*2, HEARINGDISTANCE*2); 
+    ellipse(width/2, height/2, HEARINGDISTANCE*2, HEARINGDISTANCE*2); 
     
     //Drawing bullets
     fill(255);
@@ -49,12 +49,11 @@ class Radar {
     
     //Drawing dead enemies
     for(DeadZombie dz: horde.deadZombies){
-      pushMatrix();
-        imageMode(CENTER);        
-        tint(255, round( map( dz.stayCounter,0, 50, 255, 0 ) ) );
-        image(deadZombie, dz.pos.x, dz.pos.y);
-        tint(255, 255);
-      popMatrix();
+      imageMode(CENTER);        
+      tint(255, round( map( dz.stayCounter,0, 50, 255, 0 ) ) );
+      image(deadZombie, dz.pos.x, dz.pos.y);
+      tint(255, 255);
+      imageMode(CORNER); 
     }
     
     //Drawing enemies
@@ -130,7 +129,6 @@ class Radar {
     pushMatrix();
       translate(50, 50);
       noStroke();
-      println(barWidth);
       image(lifebar, 0, 0, round(barWidth*barCurrent) , barHeight);
       for(int i=0; i<horde.player.weapon.currentAmmo; i++) {
         image(shellcase, (shellcase.width+5)*i, lifebar.height+10);
