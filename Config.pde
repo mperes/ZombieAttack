@@ -19,6 +19,9 @@ final int HEARINGDISTANCE = 200;
 //Enemy size in the radar
 final int ENEMYSIZE = 20;
 
+//Dead zombie stay counter
+final int CORPSESTAY = 50;
+
 //Size of the radar;
 final int RADARSIZE = 450;
 

@@ -1,6 +1,7 @@
 class Horde {
   
   ArrayList<Enemy> enemies;
+  ArrayList<DeadZombie> deadZombies;
   Player player;
   ArrayList<AudioSample> fx_die;
   AudioSample fx_die1;
@@ -20,6 +21,7 @@ class Horde {
   
   Horde(Player player) {
     enemies = new ArrayList<Enemy>();
+    deadZombies = new ArrayList<DeadZombie>();
     fx_die = new ArrayList<AudioSample>();
     this.player = player;
     
@@ -47,7 +49,7 @@ class Horde {
     int levelEnergy = min( levelEnergy = 1 + round(random(level)),  5);
     float levelSpeed = 0.25 + random(level);
     float levelPower = 5 + random(level);
-    float levelAwareness = random(4)+random(level)+1;
+    float levelAwareness = 100;//random(4)+random(level)+1;
     enemies.add(new Enemy(levelEnergy, spawnX, spawnY, levelSpeed, levelPower, levelAwareness, round(random(enemySprites.length-1)), round(random(enemy_deaths.length-1))));
   }
   
@@ -84,6 +86,9 @@ class Horde {
             player.kills++;
             player.score =+ enemy.getScore();
             enemy.die();
+            
+            deadZombies.add(new DeadZombie(new PVector(enemy.position.x, enemy.position.y)));
+            
             enemies.remove(e);
           }
           break;
@@ -98,6 +103,14 @@ class Horde {
         player.currentEnergy -= enemy.power;
         enemy.die();
         enemies.remove(e);
+      }
+    }
+    
+    for(int d=0; d<deadZombies.size(); d++) {
+      DeadZombie dz = deadZombies.get(d);
+      dz.update();
+      if(dz.stayCounter > CORPSESTAY){
+        deadZombies.remove(dz);
       }
     }
   }

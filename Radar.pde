@@ -6,6 +6,7 @@ class Radar {
   PImage shellcase;
   PImage sightMask;
   PImage playerSprite;
+  PImage deadZombie;
   
   Radar(Horde horde) {
     this.horde = horde;
@@ -14,6 +15,7 @@ class Radar {
     shellcase = loadImage(IMGPATH+"shellcase.png");
     sightMask = loadImage(IMGPATH+"sightmask.png");
     playerSprite = loadImage(IMGPATH+"player.png");
+    deadZombie = loadImage(IMGPATH+"dead_zombie.png");
   }
   
   void draw() {
@@ -44,6 +46,18 @@ class Radar {
     fill(255, 0, 0);
     //ellipse(horde.player.position.x, horde.player.position.y, 5, 5);
     drawPlayer();
+    
+    //Drawing dead enemies
+    for(DeadZombie dz: horde.deadZombies){
+      pushMatrix();
+        imageMode(CENTER);
+//        tint(255, round(dz.stayCounter/255));
+        
+        tint(255, round( map( dz.stayCounter,0, 50, 255, 0 ) ) );
+                
+        image(deadZombie, dz.pos.x, dz.pos.y);
+      popMatrix();
+    }
     
     //Drawing enemies
     for(Enemy enemy : horde.enemies) {
