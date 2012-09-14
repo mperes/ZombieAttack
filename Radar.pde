@@ -89,6 +89,9 @@ class Radar {
     rect(0, height/2+sightMask.height/2, width, (height-sightMask.height)/2);
     imageMode(CORNER);
     
+    //Gore effect
+    drawGore();
+    
     //Draw life bar
     drawPlayerStats();
     
@@ -163,6 +166,15 @@ class Radar {
     ellipse(eyeBallX, eyeBallY, 2, 2);
     ellipseMode(CORNER);
     popMatrix();
+  }
+  
+  void drawGore() {
+    if(horde.gore) {
+      fill(255, 0, 0, horde.goreCount);
+      noStroke();
+      rectMode(CORNER);
+      rect(0, 0, width, height);
+    }
   }
   
 }

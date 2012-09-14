@@ -12,6 +12,8 @@ class Horde {
   int level;
   float lastWave;
   float lastSpawn;
+  float goreCount;
+  Boolean gore;
   
   String[] enemy_deaths = {
     SOUNDFXPATH+"enemy_die1.mp3",
@@ -36,6 +38,8 @@ class Horde {
     level = 0;
     lastWave = millis();
     lastSpawn = millis();
+    goreCount = 0;
+    gore = false;
   }
   
   void spawn() {
@@ -54,6 +58,10 @@ class Horde {
   }
   
   void update() {
+    
+    //Check gore effect
+    checkGore();
+    
     //Advances level;
     if(millis()-lastWave > WAVEDURATION) {
       level++;
@@ -100,6 +108,7 @@ class Horde {
       enemy.update(player);
       if( pow((enemy.position.x-player.position.x), 2) + pow((enemy.position.y - player.position.y), 2) < pow(PLAYERSIZE, 2)  ) {
         fx_damage.trigger();
+        doGore();
         player.currentEnergy -= enemy.power;
         enemy.die();
         enemies.remove(e);
@@ -118,4 +127,20 @@ class Horde {
   void evade(Player player) {
   }
   
+  void checkGore() {
+    if(gore) {
+      goreCount -= 1;
+      if(goreCount <= 0) {
+        gore = false;
+        goreCount = 0;
+      }
+    }
+  }
+  void doGore() {
+    if(goreCount > 0) {
+    } else {
+      gore = true;
+      goreCount = 100;
+    }
+  }
 }
