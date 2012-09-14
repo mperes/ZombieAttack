@@ -53,7 +53,7 @@ void setup() {
 
   // Listen to port
   osc = new OscP5(this, 12000);
-  String deviceNum = "6";
+  String deviceNum = "4";
   // Osc plug      Function name      Plug name
   //  |                |                |
   osc.plug(this, "reload", "/device/"+deviceNum+"/component/Btn_MOVE");
