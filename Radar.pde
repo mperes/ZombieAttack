@@ -6,6 +6,7 @@ class Radar {
   PImage shellcase;
   PImage sightMask;
   PImage playerSprite;
+  PImage deadZombie;
   
   Radar(Horde horde) {
     this.horde = horde;
@@ -14,6 +15,7 @@ class Radar {
     shellcase = loadImage(IMGPATH+"shellcase.png");
     sightMask = loadImage(IMGPATH+"sightmask.png");
     playerSprite = loadImage(IMGPATH+"player.png");
+    deadZombie = loadImage(IMGPATH+"dead_zombie.png");
   }
   
   void draw() {
@@ -45,6 +47,16 @@ class Radar {
     //ellipse(horde.player.position.x, horde.player.position.y, 5, 5);
     drawPlayer();
     
+    //Drawing dead enemies
+    for(DeadZombie dz: horde.deadZombies){
+      pushMatrix();
+        imageMode(CENTER);        
+        tint(255, round( map( dz.stayCounter,0, 50, 255, 0 ) ) );
+        image(deadZombie, dz.pos.x, dz.pos.y);
+        tint(255, 255);
+      popMatrix();
+    }
+    
     //Drawing enemies
     for(Enemy enemy : horde.enemies) {
       if( pow((enemy.position.x - width/2), 2) + pow((enemy.position.y - height/2), 2) < pow(RADARSIZE/2, 2)  ) {
@@ -59,12 +71,7 @@ class Radar {
         int posX = round(enemy.position.x);
         int posY = round(enemy.position.y);
         rect(posX, posY, 20, 20);
-        if(enemy.alive){
-          image(horde.enemySprites[enemy.sprite], posX, posY);
-        }else{
-          //draw blood
-          println("dead");
-        }
+        image(horde.enemySprites[enemy.sprite], posX, posY);
         imageMode(CORNER);
         rectMode(CORNER);
       }
@@ -81,6 +88,9 @@ class Radar {
     rect(0, 0, width, (height-sightMask.height)/2);
     rect(0, height/2+sightMask.height/2, width, (height-sightMask.height)/2);
     imageMode(CORNER);
+    
+    //Gore effect
+    drawGore();
     
     //Draw life bar
     drawPlayerStats();
@@ -156,6 +166,15 @@ class Radar {
     ellipse(eyeBallX, eyeBallY, 2, 2);
     ellipseMode(CORNER);
     popMatrix();
+  }
+  
+  void drawGore() {
+    if(horde.gore) {
+      fill(255, 0, 0, horde.goreCount);
+      noStroke();
+      rectMode(CORNER);
+      rect(0, 0, width, height);
+    }
   }
   
 }

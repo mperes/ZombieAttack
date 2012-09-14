@@ -1,6 +1,7 @@
 class Horde {
   
   ArrayList<Enemy> enemies;
+  ArrayList<DeadZombie> deadZombies;
   Player player;
   ArrayList<AudioSample> fx_die;
   AudioSample fx_die1;
@@ -11,6 +12,8 @@ class Horde {
   int level;
   float lastWave;
   float lastSpawn;
+  float goreCount;
+  Boolean gore;
   
   String[] enemy_deaths = {
     SOUNDFXPATH+"enemy_die1.mp3",
@@ -20,6 +23,7 @@ class Horde {
   
   Horde(Player player) {
     enemies = new ArrayList<Enemy>();
+    deadZombies = new ArrayList<DeadZombie>();
     fx_die = new ArrayList<AudioSample>();
     this.player = player;
     
@@ -34,6 +38,8 @@ class Horde {
     level = 0;
     lastWave = millis();
     lastSpawn = millis();
+    goreCount = 0;
+    gore = false;
   }
   
   void spawn() {
@@ -52,6 +58,10 @@ class Horde {
   }
   
   void update() {
+    
+    //Check gore effect
+    checkGore();
+    
     //Advances level;
     if(millis()-lastWave > WAVEDURATION) {
       level++;
@@ -83,24 +93,33 @@ class Horde {
             fx_die.get(enemy.death_sound).trigger();
             player.kills++;
             player.score =+ enemy.getScore();
-            
             enemy.die();
-            if(enemy.death_counter > ENEMYCORPSESTAY){
-              enemies.remove(e);
-            }
+            
+            deadZombies.add(new DeadZombie(new PVector(enemy.position.x, enemy.position.y)));
+            
+            enemies.remove(e);
           }
           break;
         }
       }
     }
-    for(int e=0; e<enemies.size(); e++) {//enemy attacks player
+    for(int e=0; e<enemies.size(); e++) {
       Enemy enemy = enemies.get(e);
       enemy.update(player);
       if( pow((enemy.position.x-player.position.x), 2) + pow((enemy.position.y - player.position.y), 2) < pow(PLAYERSIZE, 2)  ) {
         fx_damage.trigger();
+        doGore();
         player.currentEnergy -= enemy.power;
         enemy.die();
         enemies.remove(e);
+      }
+    }
+    
+    for(int d=0; d<deadZombies.size(); d++) {
+      DeadZombie dz = deadZombies.get(d);
+      dz.update();
+      if(dz.stayCounter > CORPSESTAY){
+        deadZombies.remove(dz);
       }
     }
   }
@@ -108,4 +127,20 @@ class Horde {
   void evade(Player player) {
   }
   
+  void checkGore() {
+    if(gore) {
+      goreCount -= 1;
+      if(goreCount <= 0) {
+        gore = false;
+        goreCount = 0;
+      }
+    }
+  }
+  void doGore() {
+    if(goreCount > 0) {
+    } else {
+      gore = true;
+      goreCount = 100;
+    }
+  }
 }

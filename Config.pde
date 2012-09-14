@@ -4,7 +4,7 @@ final int MAPHEIGHT = 768;
 
 //Path to sound effect files. This path is relative to /Data
 final String SOUNDFXPATH = "soundfx/";
-final String SOUNDTRACKPATH = "soundtracklow/Blood/";
+final String SOUNDTRACKPATH = "soundtrack/Blood/";
 final float SOUNDTRACKGAIN = -25.0;
 final int SOUNDBUFFERSIZE = 256; 
 
@@ -19,8 +19,8 @@ final int HEARINGDISTANCE = 200;
 //Enemy size in the radar
 final int ENEMYSIZE = 20;
 
-//How long blood stays on the screen
-final int ENEMYCORPSESTAY = 50;
+//Dead zombie stay counter
+final int CORPSESTAY = 50;
 
 //Size of the radar;
 final int RADARSIZE = 450;
@@ -45,4 +45,6 @@ final String SCOREBOARDFILE = "scoreboard/scoreboard.csv";
 final int SCORESLINEHEIGHT = 50;
 final int SCORESDISPLAYED = MAPHEIGHT / SCORESLINEHEIGHT - 1;
 final int SCOREBOARDDISPLAYTIME = 20 * 1000; //In millis
+
+final int GOREDURATION = 3 * 1000;
 
