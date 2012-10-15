@@ -30,6 +30,8 @@ This is used to hold the state of the game:
 int scene;
 
 AudioPlayer backgroundMusic;
+//Change the songs bellow to your own. The directory where the songs are stored are under SOUNDTRACKPATH
+//in the config tab.
 String[] soundtracks = {
   "1 - Pestis Cruento.mp3", 
   "2 - Unholy Voices.mp3", 
